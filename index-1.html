@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>SEN Parent Companion</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2301696f'/><path d='M30 50 Q50 25 70 50 Q50 75 30 50 Z' fill='%23f7f6f2'/></svg>" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen">
+
+      <!-- ==================== AUTH SCREEN ==================== -->
+      <div class="auth-screen" id="authScreen">
+        <div class="auth-card">
+          <div class="auth-logo">
+            <svg width="40" height="40" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#01696f"/><path d="M30 50 Q50 25 70 50 Q50 75 30 50 Z" fill="#f7f6f2"/></svg>
+          </div>
+          <h1 class="auth-title">SEN Parent Companion</h1>
+          <p class="auth-sub" id="authSub">Sign in to your account</p>
+
+          <form class="app-form" id="authForm">
+            <div class="form-group">
+              <label class="form-label" for="authEmail">Email</label>
+              <input type="email" class="form-input" id="authEmail" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="authPassword">Password</label>
+              <input type="password" class="form-input" id="authPassword" required autocomplete="current-password" minlength="6" />
+            </div>
+            <p class="auth-error" id="authError" hidden></p>
+            <button type="submit" class="btn-primary" id="authSubmitBtn">Sign in</button>
+          </form>
+
+          <button class="auth-toggle" id="authToggle">Don't have an account? Sign up</button>
+        </div>
+      </div>
+
+      <!-- ==================== MAIN APP (hidden until signed in) ==================== -->
+      <div id="appRoot" hidden>
+
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span class="status-time" id="statusTime">8:26</span>
+        <div class="status-icons">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h20M5 12h14M8 16h8"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2"/></svg>
+        </div>
+      </div>
+
+      <!-- App Bar -->
+      <header class="app-bar" id="appBar">
+        <button class="app-bar-back" id="backBtn" aria-label="Go back" hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <h1 class="app-bar-title" id="appBarTitle">Home</h1>
+        <button class="app-bar-action" id="signOutBtnBar" aria-label="Sign out">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+        </button>
+        <button class="app-bar-action" id="themeToggle" aria-label="Toggle dark mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </header>
+
+      <!-- Screen Container -->
+      <main class="screen-container" id="screenContainer">
+
+        <!-- ==================== HOME ==================== -->
+        <section class="screen active" data-screen="home">
+          <div class="child-banner">
+            <div class="child-avatar" id="childAvatar">M</div>
+            <div class="child-info">
+              <p class="child-name" id="childName">Maya</p>
+              <p class="child-meta" id="childMeta">Age 7 · Primary · EHCP in place</p>
+            </div>
+            <button class="child-edit" id="childEditBtn" aria-label="Edit profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </button>
+          </div>
+
+          <div class="review-alert" onclick="navigate('ehcp')">
+            <div class="review-alert-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v4M12 16h.01"/></svg>
+            </div>
+            <div class="review-alert-text">
+              <p class="review-alert-title">Annual review due</p>
+              <p class="review-alert-sub">14 Oct 2026 · 2 evidence gaps in Sensory & Physical</p>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+
+          <h2 class="section-title">SEN Areas Overview</h2>
+          <p class="section-sub">Tap an area to see related evidence</p>
+          <div class="sen-grid">
+            <button class="sen-card" data-area="ci" onclick="navigateToArea('ci')">
+              <span class="sen-dot" style="--sen-color: var(--area-ci)"></span>
+              <span class="sen-label">Communication & Interaction</span>
+              <span class="sen-count">8 items</span>
+            </button>
+            <button class="sen-card" data-area="cl" onclick="navigateToArea('cl')">
+              <span class="sen-dot" style="--sen-color: var(--area-cl)"></span>
+              <span class="sen-label">Cognition & Learning</span>
+              <span class="sen-count">5 items</span>
+            </button>
+            <button class="sen-card" data-area="semh" onclick="navigateToArea('semh')">
+              <span class="sen-dot" style="--sen-color: var(--area-semh)"></span>
+              <span class="sen-label">Social, Emotional & Mental Health</span>
+              <span class="sen-count">12 items</span>
+            </button>
+            <button class="sen-card sen-card-warn" data-area="sp" onclick="navigateToArea('sp')">
+              <span class="sen-dot" style="--sen-color: var(--area-sp)"></span>
+              <span class="sen-label">Sensory & Physical</span>
+              <span class="sen-count">2 items · gaps</span>
+            </button>
+          </div>
+
+          <h2 class="section-title">Quick Actions</h2>
+          <div class="quick-actions">
+            <button class="action-tile" onclick="navigate('journal-entry')">
+              <div class="action-icon action-icon-teal">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>
+              </div>
+              <span>Log Today</span>
+            </button>
+            <button class="action-tile" onclick="navigate('evidence-form')">
+              <div class="action-icon action-icon-purple">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+              </div>
+              <span>Add Evidence</span>
+            </button>
+            <button class="action-tile" onclick="navigate('grant-checker')">
+              <div class="action-icon action-icon-gold">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5M12 17h.01"/></svg>
+              </div>
+              <span>Check Grants</span>
+            </button>
+            <button class="action-tile" onclick="navigate('export')">
+              <div class="action-icon action-icon-blue">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              </div>
+              <span>Export</span>
+            </button>
+            <button class="action-tile" onclick="navigate('shop')">
+              <div class="action-icon action-icon-gold">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              </div>
+              <span>Shop</span>
+            </button>
+          </div>
+
+          <h2 class="section-title">Recent Activity</h2>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span class="activity-dot" style="--sen-color: var(--area-ci)"></span>
+              <div>
+                <p class="activity-title">SALT session logged</p>
+                <p class="activity-sub">Ms Patel · 24 Aug</p>
+              </div>
+            </div>
+            <div class="activity-item">
+              <span class="activity-dot" style="--sen-color: var(--area-semh)"></span>
+              <div>
+                <p class="activity-title">Journal entry — meltdown at assembly</p>
+                <p class="activity-sub">22 Aug</p>
+              </div>
+            </div>
+            <div class="activity-item">
+              <span class="activity-dot" style="--sen-color: var(--area-cl)"></span>
+              <div>
+                <p class="activity-title">EHCP review letter uploaded</p>
+                <p class="activity-sub">20 Aug</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="auth-toggle" id="signOutBtn" style="margin-top:24px;">Sign out</button>
+        </section>
+
+        <!-- ==================== EHCP PLAN OVERVIEW ==================== -->
+        <section class="screen" data-screen="ehcp">
+          <div class="plan-card">
+            <div class="plan-card-header">
+              <span class="plan-badge">EHCP Active</span>
+              <p class="plan-ref">Ref: EHC/2024/003417</p>
+            </div>
+            <div class="plan-detail">
+              <div class="plan-detail-row"><span>Date issued</span><strong>15 Mar 2024</strong></div>
+              <div class="plan-detail-row"><span>Next review</span><strong>14 Oct 2026</strong></div>
+              <div class="plan-detail-row"><span>SEN Officer</span><strong>J. Williams</strong></div>
+              <div class="plan-detail-row"><span>Local Authority</span><strong>Greenwich</strong></div>
+            </div>
+          </div>
+
+          <h2 class="section-title">Evidence by SEN Area</h2>
+          <p class="section-sub">Four broad areas of need (SEND Code of Practice 2015)</p>
+          <div class="sen-grid">
+            <button class="sen-card" data-area="ci" onclick="navigate('evidence-vault')">
+              <span class="sen-dot" style="--sen-color: var(--area-ci)"></span>
+              <span class="sen-label">Communication & Interaction</span>
+              <span class="sen-count">8 items</span>
+            </button>
+            <button class="sen-card" data-area="cl" onclick="navigate('evidence-vault')">
+              <span class="sen-dot" style="--sen-color: var(--area-cl)"></span>
+              <span class="sen-label">Cognition & Learning</span>
+              <span class="sen-count">5 items</span>
+            </button>
+            <button class="sen-card" data-area="semh" onclick="navigate('evidence-vault')">
+              <span class="sen-dot" style="--sen-color: var(--area-semh)"></span>
+              <span class="sen-label">Social, Emotional & Mental Health</span>
+              <span class="sen-count">12 items</span>
+            </button>
+            <button class="sen-card sen-card-warn" data-area="sp" onclick="navigate('evidence-vault')">
+              <span class="sen-dot" style="--sen-color: var(--area-sp)"></span>
+              <span class="sen-label">Sensory & Physical</span>
+              <span class="sen-count">2 items · gaps</span>
+            </button>
+          </div>
+
+          <div class="nav-cards">
+            <button class="nav-card" onclick="navigate('evidence-vault')">
+              <div class="nav-card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+              </div>
+              <div class="nav-card-body">
+                <p class="nav-card-title">Evidence Vault</p>
+                <p class="nav-card-sub">27 documents · 3 actions pending</p>
+              </div>
+            </button>
+            <button class="nav-card" onclick="navigate('provision-map')">
+              <div class="nav-card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </div>
+              <div class="nav-card-body">
+                <p class="nav-card-title">Provision Map</p>
+                <p class="nav-card-sub">Section F tracking</p>
+              </div>
+            </button>
+            <button class="nav-card" onclick="navigate('timeline')">
+              <div class="nav-card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div class="nav-card-body">
+                <p class="nav-card-title">Review Timeline</p>
+                <p class="nav-card-sub">All key dates</p>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================== EVIDENCE VAULT ==================== -->
+        <section class="screen" data-screen="evidence-vault">
+          <div class="filter-bar">
+            <button class="filter-chip active" data-filter="all">All</button>
+            <button class="filter-chip" data-filter="ci" style="--chip-color: var(--area-ci)">C&I</button>
+            <button class="filter-chip" data-filter="cl" style="--chip-color: var(--area-cl)">C&L</button>
+            <button class="filter-chip" data-filter="semh" style="--chip-color: var(--area-semh)">SEMH</button>
+            <button class="filter-chip" data-filter="sp" style="--chip-color: var(--area-sp)">S&P</button>
+          </div>
+
+          <div class="evidence-list" id="evidenceList">
+            <!-- Populated by JS -->
+          </div>
+
+
+        </section>
+
+        <!-- ==================== ADD EVIDENCE FORM ==================== -->
+        <section class="screen" data-screen="evidence-form">
+          <form class="app-form" id="evidenceForm">
+            <div class="form-group">
+              <label class="form-label" for="evTitle">Document title <span class="req">*</span></label>
+              <input type="text" class="form-input" id="evTitle" placeholder="e.g. OT report — Ms Patel" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="evDate">Date of document <span class="req">*</span></label>
+              <input type="date" class="form-input" id="evDate" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">SEN area tag <span class="req">*</span></label>
+              <div class="chip-group" id="evAreaChips">
+                <button type="button" class="chip" data-area="ci" style="--chip-color: var(--area-ci)">Comm. & Interaction</button>
+                <button type="button" class="chip" data-area="cl" style="--chip-color: var(--area-cl)">Cognition & Learning</button>
+                <button type="button" class="chip" data-area="semh" style="--chip-color: var(--area-semh)">Social, Emotional & MH</button>
+                <button type="button" class="chip" data-area="sp" style="--chip-color: var(--area-sp)">Sensory & Physical</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="evType">Document type <span class="req">*</span></label>
+              <select class="form-input" id="evType">
+                <option value="">Select type…</option>
+                <option>Professional report</option>
+                <option>School report</option>
+                <option>Medical letter</option>
+                <option>Correspondence with LA</option>
+                <option>Parent observation</option>
+                <option>Provision record</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="evAuthor">Author / source <span class="req">*</span></label>
+              <input type="text" class="form-input" id="evAuthor" placeholder="Name, role, organisation" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="evSummary">Key points / summary <span class="req">*</span></label>
+              <textarea class="form-textarea" id="evSummary" rows="4" placeholder="What does this document say and why does it matter?"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Attach file</label>
+              <button type="button" class="attach-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                <span>Photo or PDF</span>
+              </button>
+            </div>
+            <div class="form-group">
+              <label class="form-switch">
+                <input type="checkbox" id="evAction" />
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="switch-label">Action required</span>
+              </label>
+            </div>
+            <div class="form-group" id="evActionDateGroup" hidden>
+              <label class="form-label" for="evActionDate">Follow-up due date</label>
+              <input type="date" class="form-input" id="evActionDate" />
+            </div>
+            <button type="submit" class="btn-primary">Save Evidence</button>
+          </form>
+        </section>
+
+        <!-- ==================== PROVISION MAP ==================== -->
+        <section class="screen" data-screen="provision-map">
+          <p class="section-sub">Section F — Special Educational Provision</p>
+          <div class="provision-list">
+            <div class="provision-item">
+              <div class="provision-header">
+                <span class="sen-tag" style="--sen-color: var(--area-ci)">C&I</span>
+                <p class="provision-text">1:1 SALT sessions, 30 min weekly</p>
+              </div>
+              <div class="provision-status provision-delivered">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Delivered
+              </div>
+            </div>
+            <div class="provision-item">
+              <div class="provision-header">
+                <span class="sen-tag" style="--sen-color: var(--area-sp)">S&P</span>
+                <p class="provision-text">Sensory breaks every 45 minutes</p>
+              </div>
+              <div class="provision-status provision-partial">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                Partially
+              </div>
+            </div>
+            <div class="provision-item">
+              <div class="provision-header">
+                <span class="sen-tag" style="--sen-color: var(--area-semh)">SEMH</span>
+                <p class="provision-text">Emotional regulation support plan</p>
+              </div>
+              <div class="provision-status provision-delivered">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Delivered
+              </div>
+            </div>
+            <div class="provision-item">
+              <div class="provision-header">
+                <span class="sen-tag" style="--sen-color: var(--area-cl)">C&L</span>
+                <p class="provision-text">Specialist literacy programme 3x weekly</p>
+              </div>
+              <div class="provision-status provision-missing">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+                Not delivered
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== REVIEW TIMELINE ==================== -->
+        <section class="screen" data-screen="timeline">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot timeline-done"></div>
+              <div class="timeline-content">
+                <p class="timeline-date">Sep 2023</p>
+                <p class="timeline-title">EHC needs assessment requested</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot timeline-done"></div>
+              <div class="timeline-content">
+                <p class="timeline-date">Dec 2023</p>
+                <p class="timeline-title">Assessment agreed by LA</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot timeline-done"></div>
+              <div class="timeline-content">
+                <p class="timeline-date">Feb 2024</p>
+                <p class="timeline-title">Draft plan received</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot timeline-done"></div>
+              <div class="timeline-content">
+                <p class="timeline-date">15 Mar 2024</p>
+                <p class="timeline-title">Final EHCP issued</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot timeline-current"></div>
+              <div class="timeline-content">
+                <p class="timeline-date">14 Oct 2026</p>
+                <p class="timeline-title">Annual review meeting</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== THERAPY HUB ==================== -->
+        <section class="screen" data-screen="therapy">
+          <div class="sensory-summary">
+            <h3 class="card-title">Sensory Profile</h3>
+            <div class="sensory-bars">
+              <div class="sensory-bar-row">
+                <span class="sensory-bar-label">Auditory</span>
+                <div class="sensory-bar-track"><div class="sensory-bar-fill" style="width: 80%; --bar-color: var(--area-semh)"></div></div>
+                <span class="sensory-bar-level">High</span>
+              </div>
+              <div class="sensory-bar-row">
+                <span class="sensory-bar-label">Tactile</span>
+                <div class="sensory-bar-track"><div class="sensory-bar-fill" style="width: 60%; --bar-color: var(--area-gold)"></div></div>
+                <span class="sensory-bar-level">Mod</span>
+              </div>
+              <div class="sensory-bar-row">
+                <span class="sensory-bar-label">Proprioceptive</span>
+                <div class="sensory-bar-track"><div class="sensory-bar-fill" style="width: 90%; --bar-color: var(--area-semh)"></div></div>
+                <span class="sensory-bar-level">High</span>
+              </div>
+              <div class="sensory-bar-row">
+                <span class="sensory-bar-label">Vestibular</span>
+                <div class="sensory-bar-track"><div class="sensory-bar-fill" style="width: 40%; --bar-color: var(--area-sp)"></div></div>
+                <span class="sensory-bar-level">Low</span>
+              </div>
+              <div class="sensory-bar-row">
+                <span class="sensory-bar-label">Oral/Olfactory</span>
+                <div class="sensory-bar-track"><div class="sensory-bar-fill" style="width: 70%; --bar-color: var(--area-gold)"></div></div>
+                <span class="sensory-bar-level">Mod</span>
+              </div>
+            </div>
+            <button class="btn-ghost" onclick="navigate('sensory-profile')">View full assessment</button>
+          </div>
+
+          <h2 class="section-title">Therapy Logs</h2>
+          <div class="nav-cards">
+            <button class="nav-card" onclick="navigate('ot-log')">
+              <div class="nav-card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6.3 6.3a2 2 0 0 0 2.8 2.8l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.1 2.1a2 2 0 0 1-2.8-2.8z"/></svg>
+              </div>
+              <div class="nav-card-body">
+                <p class="nav-card-title">OT Log</p>
+                <p class="nav-card-sub">6 sessions logged</p>
+              </div>
+            </button>
+            <button class="nav-card" onclick="navigate('salt-log')">
+              <div class="nav-card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="nav-card-body">
+                <p class="nav-card-title">SALT Log</p>
+                <p class="nav-card-sub">8 sessions logged</p>
+              </div>
+            </button>
+          </div>
+
+          <h2 class="section-title">Strategies & Accommodations</h2>
+          <div class="strategy-list">
+            <div class="strategy-item">
+              <div class="strategy-info">
+                <p class="strategy-name">Noise-cancelling headphones</p>
+                <p class="strategy-meta">Sensory & Physical · Assemblies</p>
+              </div>
+              <span class="strategy-badge strategy-working">Working</span>
+            </div>
+            <div class="strategy-item">
+              <div class="strategy-info">
+                <p class="strategy-name">Visual schedule cards</p>
+                <p class="strategy-meta">Communication · Daily routine</p>
+              </div>
+              <span class="strategy-badge strategy-working">Working</span>
+            </div>
+            <div class="strategy-item">
+              <div class="strategy-info">
+                <p class="strategy-name">Weighted lap blanket</p>
+                <p class="strategy-meta">Sensory & Physical · Circle time</p>
+              </div>
+              <span class="strategy-badge strategy-untested">Untested</span>
+            </div>
+            <div class="strategy-item">
+              <div class="strategy-info">
+                <p class="strategy-name">Quiet corner access</p>
+                <p class="strategy-meta">SEMH · Classroom</p>
+              </div>
+              <span class="strategy-badge strategy-not-working">Not working</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SENSORY PROFILE ==================== -->
+        <section class="screen" data-screen="sensory-profile">
+          <div class="sensory-section">
+            <h3 class="card-title">Auditory</h3>
+            <div class="sensory-checklist">
+              <div class="sensory-check-item">
+                <div>
+                  <p class="sensory-q">Hypersensitive to noise (alarms, hand dryers)</p>
+                  <p class="sensory-ctx">Daily · School assemblies</p>
+                </div>
+                <div class="severity-pills">
+                  <button class="severity-pill">0</button>
+                  <button class="severity-pill">1</button>
+                  <button class="severity-pill active">2</button>
+                  <button class="severity-pill">3</button>
+                </div>
+              </div>
+              <div class="sensory-check-item">
+                <div>
+                  <p class="sensory-q">Seeks loud sounds / banging</p>
+                  <p class="sensory-ctx">Weekly · Home</p>
+                </div>
+                <div class="severity-pills">
+                  <button class="severity-pill active">0</button>
+                  <button class="severity-pill">1</button>
+                  <button class="severity-pill">2</button>
+                  <button class="severity-pill">3</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sensory-section">
+            <h3 class="card-title">Tactile</h3>
+            <div class="sensory-check-item">
+              <div>
+                <p class="sensory-q">Avoids certain clothing textures</p>
+                <p class="sensory-ctx">Daily · Getting dressed</p>
+              </div>
+              <div class="severity-pills">
+                <button class="severity-pill">0</button>
+                <button class="severity-pill active">1</button>
+                <button class="severity-pill">2</button>
+                <button class="severity-pill">3</button>
+              </div>
+            </div>
+          </div>
+          <div class="sensory-section">
+            <h3 class="card-title">Proprioceptive</h3>
+            <div class="sensory-check-item">
+              <div>
+                <p class="sensory-q">Seeks heavy work / crashing into things</p>
+                <p class="sensory-ctx">Daily · After school</p>
+              </div>
+              <div class="severity-pills">
+                <button class="severity-pill">0</button>
+                <button class="severity-pill">1</button>
+                <button class="severity-pill active">2</button>
+                <button class="severity-pill">3</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== OT LOG ==================== -->
+        <section class="screen" data-screen="ot-log">
+          <div class="log-summary" id="otLogSummary">
+            <div class="log-summary-item">
+              <p class="log-summary-val" id="otSummaryCount">0</p>
+              <p class="log-summary-label">Sessions</p>
+            </div>
+            <div class="log-summary-item">
+              <p class="log-summary-val" id="otSummaryTime">0m</p>
+              <p class="log-summary-label">Total time</p>
+            </div>
+            <div class="log-summary-item">
+              <p class="log-summary-val" id="otSummaryTherapist">—</p>
+              <p class="log-summary-label">Therapist</p>
+            </div>
+          </div>
+          <div class="log-entry-list" id="otLogList">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- ==================== OT LOG FORM ==================== -->
+        <section class="screen" data-screen="ot-log-form">
+          <form class="app-form" id="otLogForm">
+            <div class="form-group">
+              <label class="form-label" for="otDate">Date of session <span class="req">*</span></label>
+              <input type="date" class="form-input" id="otDate" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="otTherapist">Therapist name <span class="req">*</span></label>
+              <input type="text" class="form-input" id="otTherapist" placeholder="e.g. Ms Patel" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="otSetting">Setting <span class="req">*</span></label>
+              <select class="form-input" id="otSetting">
+                <option value="">Select…</option>
+                <option>Clinic</option>
+                <option>School</option>
+                <option>Home</option>
+                <option>Virtual</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="otDuration">Duration (minutes) <span class="req">*</span></label>
+              <input type="number" class="form-input" id="otDuration" placeholder="45" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Focus of session <span class="req">*</span></label>
+              <div class="chip-group">
+                <button type="button" class="chip">Sensory integration</button>
+                <button type="button" class="chip">Fine motor</button>
+                <button type="button" class="chip">Self-care</button>
+                <button type="button" class="chip">Handwriting</button>
+                <button type="button" class="chip">Emotional regulation</button>
+                <button type="button" class="chip">Equipment trial</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">SEN area tagged <span class="req">*</span></label>
+              <div class="chip-group">
+                <button type="button" class="chip" style="--chip-color: var(--area-ci)">C&I</button>
+                <button type="button" class="chip" style="--chip-color: var(--area-cl)">C&L</button>
+                <button type="button" class="chip" style="--chip-color: var(--area-semh)">SEMH</button>
+                <button type="button" class="chip" style="--chip-color: var(--area-sp)">S&P</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="otObs">Key observations</label>
+              <textarea class="form-textarea" id="otObs" rows="3" placeholder="What was observed during the session?"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="otRec">Recommendations / home programme <span class="req">*</span></label>
+              <textarea class="form-textarea" id="otRec" rows="3" placeholder="Capture recommendations verbatim for evidence"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="otEquip">Equipment recommended / trialled</label>
+              <input type="text" class="form-input" id="otEquip" placeholder="e.g. weighted blanket, pencil grip" />
+            </div>
+            <button type="submit" class="btn-primary">Save OT Session</button>
+          </form>
+        </section>
+
+        <!-- ==================== SALT LOG ==================== -->
+        <section class="screen" data-screen="salt-log">
+          <div class="log-summary" id="saltLogSummary">
+            <div class="log-summary-item">
+              <p class="log-summary-val" id="saltSummaryCount">0</p>
+              <p class="log-summary-label">Sessions</p>
+            </div>
+            <div class="log-summary-item">
+              <p class="log-summary-val" id="saltSummaryTime">0m</p>
+              <p class="log-summary-label">Total time</p>
+            </div>
+            <div class="log-summary-item">
+              <p class="log-summary-val" id="saltSummaryTherapist">—</p>
+              <p class="log-summary-label">Therapist</p>
+            </div>
+          </div>
+          <div class="log-entry-list" id="saltLogList">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- ==================== SALT LOG FORM ==================== -->
+        <section class="screen" data-screen="salt-log-form">
+          <form class="app-form" id="saltLogForm">
+            <div class="form-group">
+              <label class="form-label" for="saltDate">Date of session <span class="req">*</span></label>
+              <input type="date" class="form-input" id="saltDate" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="saltTherapist">Therapist name <span class="req">*</span></label>
+              <input type="text" class="form-input" id="saltTherapist" placeholder="e.g. Ms Reed" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Focus <span class="req">*</span></label>
+              <div class="chip-group">
+                <button type="button" class="chip">Receptive language</button>
+                <button type="button" class="chip">Expressive language</button>
+                <button type="button" class="chip">Social communication</button>
+                <button type="button" class="chip">AAC</button>
+                <button type="button" class="chip">Speech sound</button>
+                <button type="button" class="chip">Fluency</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="saltAssess">Assessment tool used</label>
+              <input type="text" class="form-input" id="saltAssess" placeholder="e.g. CELF, ACE" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="saltObs">Key observations</label>
+              <textarea class="form-textarea" id="saltObs" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="saltRec">Recommendations / home programme <span class="req">*</span></label>
+              <textarea class="form-textarea" id="saltRec" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="saltAac">Communication aid / AAC</label>
+              <input type="text" class="form-input" id="saltAac" placeholder="e.g. PECS, Makaton" />
+            </div>
+            <button type="submit" class="btn-primary">Save SALT Session</button>
+          </form>
+        </section>
+
+        <!-- ==================== GRANTS HOME ==================== -->
+        <section class="screen" data-screen="grants">
+          <div class="grant-hero">
+            <h2 class="grant-hero-title">Grant Resource Library</h2>
+            <p class="grant-hero-sub">Programmes matched to your family</p>
+          </div>
+
+          <div class="grant-eligibility-card eligible">
+            <div class="grant-status-row">
+              <span class="grant-traffic grant-green"></span>
+              <div>
+                <p class="grant-name">Family Fund</p>
+                <p class="grant-detail">Likely eligible · 5 of 7 support areas met</p>
+              </div>
+            </div>
+            <p class="grant-meta">Ages 0–24 · UK-wide · Low income required</p>
+            <button class="btn-primary btn-sm" onclick="navigate('grant-checker')">Start application</button>
+          </div>
+
+          <div class="grant-eligibility-card eligible">
+            <div class="grant-status-row">
+              <span class="grant-traffic grant-green"></span>
+              <div>
+                <p class="grant-name">SFDC (England)</p>
+                <p class="grant-detail">Likely eligible · Funded by DfE</p>
+              </div>
+            </div>
+            <p class="grant-meta">Ages 0–17 · England · Re-apply every 24 months</p>
+            <button class="btn-primary btn-sm" onclick="navigate('grant-checker')">Check eligibility</button>
+          </div>
+
+          <div class="grant-eligibility-card review">
+            <div class="grant-status-row">
+              <span class="grant-traffic grant-amber"></span>
+              <div>
+                <p class="grant-name">Disabled Facilities Grant</p>
+                <p class="grant-detail">Review needed · Home adaptation evidence required</p>
+              </div>
+            </div>
+            <p class="grant-meta">Up to £30,000 · Via local council</p>
+          </div>
+
+          <button class="btn-ghost btn-full" onclick="navigate('grant-catalog')">View all grants</button>
+        </section>
+
+        <!-- ==================== GRANT ELIGIBILITY CHECKER ==================== -->
+        <section class="screen" data-screen="grant-checker">
+          <div class="wizard-progress">
+            <div class="wizard-progress-bar" style="width: 43%"></div>
+          </div>
+          <p class="wizard-step">Step 3 of 7</p>
+          <h2 class="section-title">Education support</h2>
+          <p class="section-sub">Does your child need a high level of support with education and learning beyond what is typical for their age?</p>
+
+          <div class="wizard-options">
+            <button class="wizard-option" data-value="3">
+              <span class="wizard-option-dot"></span>
+              <div>
+                <p class="wizard-option-label">Yes, high level</p>
+                <p class="wizard-option-desc">Needs 1:1 help to access lessons</p>
+              </div>
+            </button>
+            <button class="wizard-option active" data-value="2">
+              <span class="wizard-option-dot"></span>
+              <div>
+                <p class="wizard-option-label">Moderate</p>
+                <p class="wizard-option-desc">Some extra support needed</p>
+              </div>
+            </button>
+            <button class="wizard-option" data-value="1">
+              <span class="wizard-option-dot"></span>
+              <div>
+                <p class="wizard-option-label">Low</p>
+                <p class="wizard-option-desc">Minimal extra support</p>
+              </div>
+            </button>
+            <button class="wizard-option" data-value="0">
+              <span class="wizard-option-dot"></span>
+              <div>
+                <p class="wizard-option-label">Not needed</p>
+                <p class="wizard-option-desc">Manages independently</p>
+              </div>
+            </button>
+          </div>
+
+          <div class="wizard-evidence">
+            <p class="wizard-evidence-title">Evidence linked from your records:</p>
+            <div class="wizard-evidence-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <span>EHCP Section F — 1:1 SALT provision</span>
+            </div>
+            <div class="wizard-evidence-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <span>SALT log — 8 sessions this term</span>
+            </div>
+          </div>
+
+          <div class="wizard-nav">
+            <button class="btn-ghost" onclick="navigateBack()">Back</button>
+            <button class="btn-primary" onclick="showToast('Step saved — 3 of 7 areas confirmed')">Next</button>
+          </div>
+
+          <div class="criteria-info">
+            <p class="criteria-info-title">How eligibility works</p>
+            <p class="criteria-info-text">Family Fund and SFDC use a social model: your child must need high-level support in at least 3 of 7 areas. This app cross-references your therapy logs and journal to pre-fill evidence.</p>
+          </div>
+        </section>
+
+        <!-- ==================== GRANT CATALOGUE ==================== -->
+        <section class="screen" data-screen="grant-catalog">
+          <div class="grant-catalog-list">
+            <div class="grant-catalog-item">
+              <div class="grant-catalog-header">
+                <span class="grant-traffic grant-green"></span>
+                <p class="grant-catalog-name">Family Fund</p>
+                <span class="grant-catalog-value">~£400–500</span>
+              </div>
+              <div class="grant-catalog-tags">
+                <span class="tag">UK-wide</span>
+                <span class="tag">Ages 0–24</span>
+                <span class="tag">Every 24 months</span>
+              </div>
+              <p class="grant-catalog-desc">UK's largest grant-giving charity for disabled/seriously ill children. Items, vouchers, activities, family breaks.</p>
+            </div>
+            <div class="grant-catalog-item">
+              <div class="grant-catalog-header">
+                <span class="grant-traffic grant-green"></span>
+                <p class="grant-catalog-name">SFDC Programme</p>
+                <span class="grant-catalog-value">~£400–500</span>
+              </div>
+              <div class="grant-catalog-tags">
+                <span class="tag">England</span>
+                <span class="tag">Ages 0–17</span>
+                <span class="tag">DfE funded</span>
+              </div>
+              <p class="grant-catalog-desc">Support for Families with Disabled Children. Administered by Family Fund. Clothing, bedding, tech items, days out.</p>
+            </div>
+            <div class="grant-catalog-item">
+              <div class="grant-catalog-header">
+                <span class="grant-traffic grant-amber"></span>
+                <p class="grant-catalog-name">Disabled Facilities Grant</p>
+                <span class="grant-catalog-value">Up to £30k</span>
+              </div>
+              <div class="grant-catalog-tags">
+                <span class="tag">England</span>
+                <span class="tag">Via council</span>
+                <span class="tag">Home adapt.</span>
+              </div>
+              <p class="grant-catalog-desc">Means-tested (except for children under 18). For home adaptations: ramps, accessible bathrooms, specialist equipment.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== JOURNAL ENTRY ==================== -->
+        <section class="screen" data-screen="journal-entry">
+          <div class="journal-date-header">
+            <p class="journal-date-day">Thursday</p>
+            <p class="journal-date-full">27 August 2026</p>
+          </div>
+
+          <form class="app-form" id="journalForm">
+            <div class="form-group">
+              <label class="form-label">School day? <span class="req">*</span></label>
+              <div class="chip-group">
+                <button type="button" class="chip active">Yes</button>
+                <button type="button" class="chip">No</button>
+                <button type="button" class="chip">Inset</button>
+                <button type="button" class="chip">Absent</button>
+              </div>
+            </div>
+
+            <div class="mood-row">
+              <div class="mood-item">
+                <label class="form-label">Mood on arrival</label>
+                <div class="emoji-row">
+                  <button type="button" class="emoji-btn">😢</button>
+                  <button type="button" class="emoji-btn">😟</button>
+                  <button type="button" class="emoji-btn active">😐</button>
+                  <button type="button" class="emoji-btn">🙂</button>
+                  <button type="button" class="emoji-btn">😊</button>
+                </div>
+              </div>
+              <div class="mood-item">
+                <label class="form-label">Mood after school</label>
+                <div class="emoji-row">
+                  <button type="button" class="emoji-btn active">😢</button>
+                  <button type="button" class="emoji-btn">😟</button>
+                  <button type="button" class="emoji-btn">😐</button>
+                  <button type="button" class="emoji-btn">🙂</button>
+                  <button type="button" class="emoji-btn">😊</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">SEN area(s) affected today <span class="req">*</span></label>
+              <div class="chip-group">
+                <button type="button" class="chip" style="--chip-color: var(--area-ci)">C&I</button>
+                <button type="button" class="chip" style="--chip-color: var(--area-cl)">C&L</button>
+                <button type="button" class="chip active" style="--chip-color: var(--area-semh)">SEMH</button>
+                <button type="button" class="chip active" style="--chip-color: var(--area-sp)">S&P</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="jrWell">What went well</label>
+              <textarea class="form-textarea" id="jrWell" rows="2" placeholder="Strengths-based record"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="jrChallenges">Challenges / incidents <span class="req">*</span></label>
+              <textarea class="form-textarea" id="jrChallenges" rows="3" placeholder="Plain-language record of what happened"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="jrTriggers">Sensory triggers observed</label>
+              <textarea class="form-textarea" id="jrTriggers" rows="2" placeholder="e.g. noise, transition, texture"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="jrStrategies">Regulation strategies used</label>
+              <input type="text" class="form-input" id="jrStrategies" placeholder="e.g. quiet corner, headphones" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="jrSleep">Sleep last night</label>
+              <div class="sleep-row">
+                <input type="number" class="form-input sleep-input" id="jrSleepHours" placeholder="8" min="0" max="14" />
+                <span class="sleep-suffix">hours</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Save Today's Entry</button>
+          </form>
+        </section>
+
+        <!-- ==================== ANALYTICS ==================== -->
+        <section class="screen" data-screen="analytics">
+          <h2 class="section-title">Termly Pattern Analysis</h2>
+          <p class="section-sub">Autumn term · 15 entries logged</p>
+
+          <div class="analytics-card">
+            <h3 class="card-title">Mood Trend</h3>
+            <svg class="chart-mood" viewBox="0 0 300 120" preserveAspectRatio="none">
+              <polyline points="0,80 30,60 60,70 90,40 120,50 150,30 180,45 210,55 240,35 270,20 300,25"
+                fill="none" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="0,80 30,60 60,70 90,40 120,50 150,30 180,45 210,55 240,35 270,20 300,25"
+                fill="none" stroke="var(--color-primary)" stroke-width="0" />
+              <circle cx="300" cy="25" r="3" fill="var(--color-primary)"/>
+            </svg>
+            <p class="analytics-insight">Improving trend over the past 2 weeks</p>
+          </div>
+
+          <div class="analytics-card">
+            <h3 class="card-title">SEN Area Heat Map</h3>
+            <div class="heatmap">
+              <div class="heatmap-item" style="--heat: 0.8; --sen-color: var(--area-semh)">
+                <span>SEMH</span>
+                <span class="heatmap-val">8 incidents</span>
+              </div>
+              <div class="heatmap-item" style="--heat: 0.5; --sen-color: var(--area-sp)">
+                <span>S&P</span>
+                <span class="heatmap-val">5 incidents</span>
+              </div>
+              <div class="heatmap-item" style="--heat: 0.3; --sen-color: var(--area-ci)">
+                <span>C&I</span>
+                <span class="heatmap-val">3 incidents</span>
+              </div>
+              <div class="heatmap-item" style="--heat: 0.1; --sen-color: var(--area-cl)">
+                <span>C&L</span>
+                <span class="heatmap-val">1 incident</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <h3 class="card-title">Most Common Trigger</h3>
+            <div class="trigger-bar">
+              <div class="trigger-bar-row">
+                <span class="trigger-label">Transitions</span>
+                <div class="trigger-bar-track"><div class="trigger-bar-fill" style="width: 60%"></div></div>
+                <span class="trigger-count">9</span>
+              </div>
+              <div class="trigger-bar-row">
+                <span class="trigger-label">Sensory noise</span>
+                <div class="trigger-bar-track"><div class="trigger-bar-fill" style="width: 40%"></div></div>
+                <span class="trigger-count">6</span>
+              </div>
+              <div class="trigger-bar-row">
+                <span class="trigger-label">Social demands</span>
+                <div class="trigger-bar-track"><div class="trigger-bar-fill" style="width: 27%"></div></div>
+                <span class="trigger-count">4</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="analytics-card insight-card">
+            <div class="insight-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1M12 20v1M5.6 5.6l.7.7M17.7 17.7l.7.7M3 12h1M20 12h1M5.6 18.4l.7-.7M17.7 6.3l.7-.7"/><circle cx="12" cy="12" r="5"/></svg>
+            </div>
+            <div>
+              <p class="insight-title">Sleep correlation detected</p>
+              <p class="insight-text">Days after poor sleep (&lt;7 hours) show 3x more incidents. Consider noting sleep in review evidence.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== EXPORT CENTRE ==================== -->
+        <section class="screen" data-screen="export">
+          <h2 class="section-title">Export & Share</h2>
+          <p class="section-sub">Create evidence bundles for EHCP reviews, grant applications, or tribunal</p>
+
+          <div class="export-list">
+            <div class="export-item" role="button" tabindex="0" onclick="showExportPreview('Annual Review Evidence Pack')">
+              <div class="export-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">Annual Review Evidence Pack</span>
+                <span class="export-item-sub">All evidence tagged to review date, organised by 4 SEN areas</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+
+            <div class="export-item" role="button" tabindex="0" onclick="showExportPreview('EHCP Needs Assessment')">
+              <div class="export-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">EHCP Needs Assessment Submission</span>
+                <span class="export-item-sub">Chronological evidence of need across all four areas</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+
+            <div class="export-item" role="button" tabindex="0" onclick="showExportPreview('Grant Application Evidence Pack')">
+              <div class="export-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5M12 17h.01"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">Grant Application Evidence Pack</span>
+                <span class="export-item-sub">Benefit letter and professional evidence for Family Fund or SFDC</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+
+            <div class="export-item" role="button" tabindex="0" onclick="showExportPreview('Therapy Summary')">
+              <div class="export-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6.3 6.3a2 2 0 0 0 2.8 2.8l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.1 2.1a2 2 0 0 1-2.8-2.8z"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">Therapy Summary</span>
+                <span class="export-item-sub">OT and SALT logs for a date range, for SENCO or new therapist</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+
+            <div class="export-item" role="button" tabindex="0" onclick="showExportPreview('Tribunal Bundle')">
+              <div class="export-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 8l9-5 9 5M6 10v6M18 10v6M9 13v4M15 13v4"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">Tribunal Bundle</span>
+                <span class="export-item-sub">Full chronological export with source attribution per item</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+          </div>
+
+          <h2 class="section-title">Output Format</h2>
+          <div class="format-options">
+            <button class="format-option active">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+              <span>PDF (default)</span>
+            </button>
+            <button class="format-option">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              <span>CSV / Excel</span>
+            </button>
+            <button class="format-option">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+              <span>Summary</span>
+            </button>
+          </div>
+
+          <div class="audit-log">
+            <h3 class="card-title">Share Audit Log</h3>
+            <div class="audit-item">
+              <span class="audit-dot"></span>
+              <div>
+                <p class="audit-title">Shared with SENCO</p>
+                <p class="audit-meta">Therapy Summary · 20 Aug 2026</p>
+              </div>
+            </div>
+            <div class="audit-item">
+              <span class="audit-dot"></span>
+              <div>
+                <p class="audit-title">Shared with J. Williams (LA)</p>
+                <p class="audit-meta">Annual Review Pack · 18 Aug 2026</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SHOP ==================== -->
+        <section class="screen" data-screen="shop">
+          <h2 class="section-title">Recommended Shops</h2>
+          <p class="section-sub">Specialist UK retailers for buggies, seating, sensory equipment and daily living aids. External sites — always compare and check reviews before buying.</p>
+
+          <h3 class="card-title" style="margin-top:var(--space-4);">Buggies, Seating & Mobility</h3>
+          <div class="export-list">
+            <a class="export-item" href="https://www.r82.co.uk" target="_blank" rel="noopener">
+              <div class="export-item-icon" style="--sen-color: var(--area-ci);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M5 19h12l3-9H7"/><path d="M7 10L5 4H2"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">R82</span>
+                <span class="export-item-sub">Specialist paediatric seating, walkers and buggies</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+
+            <a class="export-item" href="https://www.crelling.com" target="_blank" rel="noopener">
+              <div class="export-item-icon" style="--sen-color: var(--area-ci);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M5 19h12l3-9H7"/><path d="M7 10L5 4H2"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">Crelling Harnesses</span>
+                <span class="export-item-sub">Special needs car and buggy harnesses</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          </div>
+
+          <h3 class="card-title" style="margin-top:var(--space-5);">Sensory Toys & Equipment</h3>
+          <div class="export-list">
+            <a class="export-item" href="https://www.rompa.com" target="_blank" rel="noopener">
+              <div class="export-item-icon" style="--sen-color: var(--area-sp);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">Rompa</span>
+                <span class="export-item-sub">Sensory rooms, light, sound and tactile equipment</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+
+            <a class="export-item" href="https://www.cosydirect.com/special-needs" target="_blank" rel="noopener">
+              <div class="export-item-icon" style="--sen-color: var(--area-sp);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">Cosy Direct — Special Needs</span>
+                <span class="export-item-sub">Sensory and inclusive play equipment for schools and home</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+
+            <a class="export-item" href="https://www.tts-group.co.uk/primary/sen-special-direct/sensory/" target="_blank" rel="noopener">
+              <div class="export-item-icon" style="--sen-color: var(--area-sp);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">TTS SEN Special Direct</span>
+                <span class="export-item-sub">Sensory and SEN teaching resources</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          </div>
+
+          <h3 class="card-title" style="margin-top:var(--space-5);">Adaptive Clothing & Daily Living</h3>
+          <div class="export-list">
+            <a class="export-item" href="https://www.fledglings.org.uk" target="_blank" rel="noopener">
+              <div class="export-item-icon" style="--sen-color: var(--area-gold);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.4 14.5L16 10 4 20"/><circle cx="8" cy="8" r="2"/></svg>
+              </div>
+              <div class="export-item-text">
+                <span class="export-item-title">Fledglings</span>
+                <span class="export-item-sub">Non-profit shop (part of Contact) — sensory toys, adaptive clothing, daily living aids</span>
+              </div>
+              <svg class="export-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          </div>
+
+          <p class="section-sub" style="margin-top:var(--space-5);">Need equipment but can't afford it? <a href="https://newlifecharity.co.uk" target="_blank" rel="noopener" style="color:var(--color-primary);font-weight:600;">Newlife Charity</a> provides grants and loans of specialist equipment for disabled children.</p>
+        </section>
+
+      </main>
+
+      <!-- Quick Capture Drawer -->
+      <div class="drawer-overlay" id="drawerOverlay"></div>
+      <div class="quick-capture-drawer" id="quickCaptureDrawer">
+        <div class="drawer-handle"></div>
+        <h3 class="drawer-title">Quick Capture</h3>
+        <p class="drawer-sub">Log a dated note in under 10 seconds</p>
+        <div class="drawer-actions">
+          <button class="drawer-action" onclick="closeDrawer(); navigate('journal-entry')">
+            <div class="drawer-icon drawer-icon-teal">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>
+            </div>
+            <span>Journal entry</span>
+          </button>
+          <button class="drawer-action" onclick="closeDrawer(); navigate('evidence-form')">
+            <div class="drawer-icon drawer-icon-purple">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+            </div>
+            <span>Add evidence</span>
+          </button>
+          <button class="drawer-action" onclick="closeDrawer(); navigate('ot-log-form')">
+            <div class="drawer-icon drawer-icon-blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6.3 6.3a2 2 0 0 0 2.8 2.8l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.1 2.1a2 2 0 0 1-2.8-2.8z"/></svg>
+            </div>
+            <span>OT session</span>
+          </button>
+          <button class="drawer-action" onclick="closeDrawer(); navigate('salt-log-form')">
+            <div class="drawer-icon drawer-icon-gold">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <span>SALT session</span>
+          </button>
+        </div>
+        <textarea class="drawer-note" id="quickNote" placeholder="Or type a quick note now, assign it later…"></textarea>
+        <button class="btn-primary btn-full" onclick="saveQuickNote()">Save Quick Note</button>
+      </div>
+
+      <!-- Floating Quick Capture Button -->
+      <button class="fab-main" id="fabMain" aria-label="Quick capture" onclick="openDrawer()">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+
+      <!-- Bottom Tab Bar -->
+      <nav class="tab-bar">
+        <button class="tab-item active" data-tab="home" onclick="navigate('home')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+          <span>Home</span>
+        </button>
+        <button class="tab-item" data-tab="ehcp" onclick="navigate('ehcp')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+          <span>EHCP</span>
+        </button>
+        <button class="tab-item" data-tab="therapy" onclick="navigate('therapy')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6.3 6.3a2 2 0 0 0 2.8 2.8l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.1 2.1a2 2 0 0 1-2.8-2.8z"/></svg>
+          <span>Therapy</span>
+        </button>
+        <button class="tab-item" data-tab="grants" onclick="navigate('grants')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5M12 17h.01"/></svg>
+          <span>Grants</span>
+        </button>
+        <button class="tab-item" data-tab="journal" onclick="navigate('journal-entry')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span>Journal</span>
+        </button>
+      </nav>
+
+      <!-- Toast -->
+      <div class="toast" id="toast"></div>
+
+      <!-- Export Preview Modal -->
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="exportModal">
+          <button class="modal-close" onclick="closeModal()" aria-label="Close">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+          <h3 class="modal-title" id="modalTitle">Bundle Preview</h3>
+          <div class="modal-body" id="modalBody"></div>
+        </div>
+      </div>
+
+      </div><!-- /appRoot -->
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
